@@ -59,3 +59,9 @@ console.log('Server om port 3000')
 //   ]
 // ]
 // Server om port 3000
+
+// //////////////////////////////////
+// //////////////////////////////////
+
+// Creo mongodb:
+//  docker run --name,e mymongo -p 27017:27017 mongo
