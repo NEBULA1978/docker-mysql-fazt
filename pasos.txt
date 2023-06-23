@@ -1,0 +1,84 @@
+docker run mysql
+
+next@rases:~/docker-mysql-fazt$ docker run mysql
+Unable to find image 'mysql:latest' locally
+latest: Pulling from library/mysql
+46ef68baacb7: Pull complete 
+94c1114b2e9c: Pull complete 
+ff05e3f38802: Pull complete 
+41cc3fcd9912: Pull complete 
+07bbc8bdf52a: Pull complete 
+6d88f83726a9: Pull complete 
+cf5c7d5d33f7: Pull complete 
+9db3175a2a66: Pull complete 
+feaedeb27fa9: Pull complete 
+cf91e7784414: Pull complete 
+b1770db1c329: Pull complete 
+Digest: sha256:15f069202c46cf861ce429423ae3f8dfa6423306fbf399eaef36094ce30dd75c
+Status: Downloaded newer image for mysql:latest
+2023-06-23 18:59:58+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.33-1.el8 started.
+2023-06-23 18:59:58+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2023-06-23 18:59:58+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.33-1.el8 started.
+2023-06-23 18:59:58+00:00 [ERROR] [Entrypoint]: Database is uninitialized and password option is not specified
+    You need to specify one of the following as an environment variable:
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_ALLOW_EMPTY_PASSWORD
+    - MYSQL_RANDOM_ROOT_PASSWORD
+next@rases:~/docker-mysql-fazt$ 
+
+docker run -e MYSQL_ROOT_PASSWORD=fastpasword --name mymysql mysql
+
+Abro terminal de mysql en otra consola:
+next@rases:~$ docker exec -it mymysql bash
+bash-4.4# 
+
+bash-4.4#  mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+mysql> use twitchdb
+Database changed
+mysql> create table users (id int PRYMARY Key);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PRYMARY Key)' at line 1
+mysql> CREATE TABLE users (id INT PRIMARY KEY);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> describe users;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| id    | int  | NO   | PRI | NULL    |       |
++-------+------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> 
+
+/////////////////////////
+
+Creo otra base de datos con la imagen mysql:
+
+ docker run --name miotrabasededatos -p 7777:3306 -e MYSQL_ROOT_PASSWORD=ryanpassword mysql
+next@rases:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                                                  NAMES
+d8ae633ccced   mysql     "docker-entrypoint.s…"   About a minute ago   Up About a minute   33060/tcp, 0.0.0.0:7777->3306/tcp, :::7777->3306/tcp   miotrabasededatos
+74bbe999429d   mysql     "docker-entrypoint.s…"   15 minutes ago       Up 15 minutes       3306/tcp, 33060/tcp                                    mymysql
+next@rases:~$ 
+
+next@rases:~$ docker stop miotrabasededatos
+miotrabasededatos
+next@rases:~$ docker stop mymysql
+mymysql
+next@rases:~$ 
+
+

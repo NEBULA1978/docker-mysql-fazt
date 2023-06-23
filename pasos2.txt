@@ -1,0 +1,55 @@
+next@rases:~/docker-mysql-fazt$ npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help init` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg>` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+package name: (docker-mysql-fazt) 
+version: (1.0.0) 
+description: 
+entry point: (server.js) 
+test command: 
+git repository: 
+keywords: 
+author: 
+license: (ISC) 
+About to write to /home/next/docker-mysql-fazt/package.json:
+
+{
+  "name": "docker-mysql-fazt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
+
+
+Is this OK? (yes) yes
+next@rases:~/docker-mysql-fazt$ npm i express
+
+added 58 packages, and audited 59 packages in 5s
+
+8 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+next@rases:~/docker-mysql-fazt$ npm i mysql2
+
+added 11 packages, and audited 70 packages in 4s
+
+8 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+next@rases:~/docker-mysql-fazt$ 
+
